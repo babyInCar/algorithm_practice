@@ -18,7 +18,7 @@ def bucket_sort(array=[]):
     bucket_len = len(array)
     for i in range(0, len(array)):
         num = int((array[i] - min_value) * (bucket_len-1)  / minus)
-        bucket[num].append(array[num])
+        bucket_list[num].append(array[num])
     # 4.对每个桶中的元素进行排序
     for bucket in bucket_list:
         bucket.sort()
@@ -28,7 +28,7 @@ def bucket_sort(array=[]):
         for element in sub_list:
              sorted_list.append(element)
      
-     return sorted_list
+    return sorted_list
 soap_array = [4.12,6.421,0.0023,3.0,2.123,8.122,4.12,10.09]
 print(bucket_sort(soap_array))
     
