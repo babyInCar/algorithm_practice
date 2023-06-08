@@ -18,7 +18,7 @@ def bucket_sort(array=[]):
     bucket_len = len(array)
     for i in range(0, len(array)):
         num = int((array[i] - min_value) * (bucket_len-1)  / minus)
-        bucket_list[num].append(array[num])
+        bucket_list[num].append(array[i])
     # 4.对每个桶中的元素进行排序
     for bucket in bucket_list:
         bucket.sort()
