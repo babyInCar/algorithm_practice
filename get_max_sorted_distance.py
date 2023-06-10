@@ -34,7 +34,7 @@ def get_max_sorted_distance(array=[]):
           continue
         if bucket_list[i].min - left_max > max_distance:
            max_distance = bucket_list[i].min - left_max
-           left_max = bucket_list[i].max
+        left_max = bucket_list[i].max
     return max_distance      
   
 soap_array = [2,6,3,5,10,9]
