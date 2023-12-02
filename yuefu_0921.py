@@ -2,9 +2,9 @@
 # given a array like:foo = [{'name': 'bob', 'age': 20}, {'name': "alice", "age": 47}, {"name": "lucy", "age": 30}], please sort the elements by name or age
 # 给定一个数组，foo = [{'name': 'bob', 'age': 20}, {'name': "alice", "age": 47}, {"name": "lucy", "age": 30}], 请分别按name和age排序输出
 
-foo = [{'name': 'bob', 'age': 20}, {'name': "alice", "age": 47}, {"name": "lucy", "age": 30}
+foo = [{'name': 'bob', 'age': 20}, {'name': "alice", "age": 47}, {"name": "lucy", "age": 30}]
 
-def sort_by_given_key(foo,key):
+def sort_by_given_key(foo, key):
        """
        @param: foo: 指定的列表
        @param: 需要排序的key
@@ -17,7 +17,7 @@ def sort_by_given_key(foo,key):
            for f in foo:
                if f.get(key) == k:
                    result_list.append(f)
-           return result_list
-  
- print(sort_by_given_key(foo,"age"))
- print(sort_by_given_key(foo,"name"))
+       return result_list
+
+print(sort_by_given_key(foo, "age"))
+print(sort_by_given_key(foo, "name"))
