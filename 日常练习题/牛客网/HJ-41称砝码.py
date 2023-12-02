@@ -33,7 +33,20 @@ x1, x2, x3...xn 。现在要用这些砝码去称物体的重量(放在同一侧
 
 """
   解题思路:
-  
+  1.先给出砝码的列表，比如 
+    2
+    1 2
+    2 1
+  对应的所有砝码的列表为:[1,1,2]
+ 2.算出能表示的所有的结果
+  {0}代表最初始值
+  当遍历到1时，
+  {0,0+1}
+  再遍历到1时
+  {0,1,0+1,1+2} = {0,1,2} 三种情况
+  再遍历到2时
+  {0,1,2,2,3,4} = {0,1,2,3,4} 五种情况
+  {}  
 """
 
 n = int(input())
@@ -41,15 +54,16 @@ weight_list = input().split(" ")
 num_list = input().split(" ")
 fama_list = []
 for i in range(n):
-    for item in num_list:
+    for item in range(int(num_list[i])):
         fama_list.append(weight_list[i])
 
-total_list = [0]
+total_set = {0}
 for i in fama_list:
     temp_list = []
-    for item in total_list:
-        total_list.append(item+int(i))
-        total_set = list(set(total_list))
-print(len(total_list))
+    for item in total_set:
+        temp_list.append(item+int(i))
+    total_set |= set(temp_list)
+    # total_set = list(set(total_list))
+print(len(total_set))
 
 
