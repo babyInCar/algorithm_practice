@@ -49,11 +49,9 @@ for i in range(0, (num_total-1)*2, 2):
     else:
         link_list.insert(pos+1, s1)
 link_list.remove(num_list[-1])
-print(link_list)
+# print(link_list)
 for item in link_list:
     print(int(item), end=" ")
-    # num_list[2:num_total*2]:
-    # pass
 
 
 
