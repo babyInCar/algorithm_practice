@@ -17,42 +17,23 @@
 输入：nums = [1,1,5,4,5],target=3
 输出：-1
 """
-from typing import List
-
-# def lengthOfLongestSubsequence(nums: List[int], target: int) -> int:
-#     d = {0: -1}  # 初始化字典，键为前缀和，值为对应的下标
-#     s = 0  # 初始前缀和为0
-#     max_length = -1  # 初始最大子序列长度为-1
-#     for i, num in enumerate(nums):
-#         s += num  # 更新前缀和
-#         if s - target in d:  # 如果前缀和减去目标值在字典中，说明找到了一个子序列
-#             max_length = max(max_length, i - d[s - target])  # 更新最大子序列长度
-#         d[s] = i  # 将前缀和以及对应的下标存入字典
-#     print(d)
-#     return max_length
 
 def find_subsequences(nums, target):
-   result = []
-   n = len(nums)
+    dp = [-1] * (target+1)
+    dp[0] = 0
+    s = 0
+    for x in nums:
+        s = min(s + x, target)
+        for j in range(s, x-1, -1):
+            if dp[j - x] != -1:
+                dp[j] = max(dp[j], dp[j-x] + 1)
+            print(dp)
+    return dp[target]
 
-   def backtrack(start, path):
-       if sum(path) == target:
-           result.append(len(path[:]))
-           return
-       if start == n:
-           return
-
-       for i in range(start, n):
-           path.append(nums[i])
-           backtrack(i + 1, path)
-           path.pop()
-
-   backtrack(0, [])
-   return max(result)
-
-nums = [3,7,6,7,2,2,2,10,7,10,8,7,7,10,7,3,1,2,8,3,5,1,5,8,4,8,8,7,6,2,4,8,10,9,5,9,2,3,1,7,4,10,7,5,2,8,6,5,1,3,5,9,9,10,6,10]
-target = 162
+# nums = [3,5,2,3,4]
+nums = [1,2,3,4,5]
+# nums = [1,1,5,4,5]
+# nums = [7,1,1]
+target = 9
 print(find_subsequences(nums, target))
-
-
 # print(find_subsequences(nums=[3,5,2,3,4], target=12))
