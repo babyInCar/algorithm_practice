@@ -3,7 +3,11 @@
 # 给定一个数组，foo = [{'name': 'bob', 'age': 20}, {'name': "alice", "age": 47}, {"name": "lucy", "age": 30}], 请分别按name和age排序输出
 
 foo = [{'name': 'bob', 'age': 20}, {'name': "alice", "age": 47}, {"name": "lucy", "age": 30}]
+# 方法一：
+sf = sorted(foo, key=lambda x: x.get('age'))
+print(sf)
 
+# 方法二：
 def sort_by_given_key(foo, key):
        """
        @param: foo: 指定的列表
@@ -20,4 +24,4 @@ def sort_by_given_key(foo, key):
        return result_list
 
 print(sort_by_given_key(foo, "age"))
-print(sort_by_given_key(foo, "name"))
+# print(sort_by_given_key(foo, "name"))
