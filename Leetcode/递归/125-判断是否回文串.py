@@ -16,7 +16,7 @@ class Solution:
         for index, sub_str in enumerate(s[:int(str_len/2)]):
             if s[index] != s[str_len-index-1]:
                 return False
-            self.isPalindrome(s[index:str_len-index-1])
+            # self.isPalindrome(s[index:str_len-index-1])
         return True
 
 s = Solution()

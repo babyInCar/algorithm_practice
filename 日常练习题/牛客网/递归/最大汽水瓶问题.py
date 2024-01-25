@@ -21,33 +21,47 @@
     5
     40
 """
-import math
 
 """
     分析：
     这种是典型的递归算法问题
 """
-import sys
-from typing import List
 
-res_list = []
-def calc_bottles(raw_list:List, res):
+def calc_sum(input:int):
     if input <= 1:
-        return
+        return 0
     elif input == 2:
-        res += 1
+        return 1
     else:
-        res_list.append(math.floor(input / 3))
-        input = math.floor(input / 3)
-        print("input is:", input)
-        calc_bottles(input, res)
-    return res_list
+        total = input // 3
+        remainder = input % 3
+    return total + calc_sum(total + remainder)
 
-for line in sys.stdin:
-    raw_list = []
-    if int(line) == 0:
+# while True:
+#     input_num = int(input())
+#     if input_num == 0:
+#         break
+#     print(calc_sum(input_num))
+
+# for res in res_list:
+#     print(res)
+
+# 解法二：
+"""
+不用递归来解决问题
+"""
+def max(n:int):
+    total = 0
+    while n >= 3:
+        total += n // 3
+        n = n % 3 + n // 3
+    # 不足三瓶，向老板借一瓶
+    if n == 2:
+        total += 1
+    return total
+
+while True:
+    input_num = int(input())
+    if input_num == 0:
         break
-    raw_list.append(int(line))
-    res_list = calc_bottles(raw_list)
-    for res in res_list:
-        print(res)
+    print(max(input_num))
