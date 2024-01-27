@@ -10,8 +10,8 @@ from typing import List
 def subarraySum(nums: List[int], k: int) -> int:
     pre, count = 0,0
     mp = {0:1}
-    for i in range(len(nums)):
-        pre += nums[i]
+    for num in nums:
+        pre += num
         if pre - k in mp:
             count += mp[pre-k]
         mp[pre] = mp.get(pre, 0) + 1
