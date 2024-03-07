@@ -28,9 +28,9 @@ OK
 
 """
 def check(pw):
-    if len(pw)<=8:
+    if len(pw)<8:
         return 0
-    a,b,c,d = 0,0,0,0
+    a, b, c, d = 0,0,0,0
     for s in pw:
         if s.isupper():
             a = 1
@@ -43,7 +43,8 @@ def check(pw):
     if a+b+c+d < 3:
         return 0
     dc = {}
-    for i in range(len(pw)-3):
+    # print(pw[:-3])
+    for i in range(len(pw[:-3])):
         if pw[i:i+3] in dc.keys():
             return 0
         else:
