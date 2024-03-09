@@ -48,5 +48,6 @@ class Solution:
         dfs(0, 0)
         return ans
 
+
 s = Solution()
 print(s.restoreIpAddresses("25525521132"))
