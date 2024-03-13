@@ -7,14 +7,19 @@
 
 """
 
-
-class Node:
+class ListNode:
     def __init__(self, data):
         self.data = data
         self.next = None
 
-def getCircle():
-    p1 = head.next
-    p2 = head.next.next
+class Node:
+    def hasCycle(self, head: ListNode) -> bool:
+        p1 = head
+        p2 = head.next.next
 
-    # while p1.next != p1.next
+        while p2 is not None and p2.next is not None:
+            p1 = p1.next
+            p2 = p2.next.next
+            if p1 == p2:
+                return True
+        return False
