@@ -28,13 +28,12 @@
 
 from math import ceil
 def can_eat_all(peaches, speed, hours):
-    if len(peaches) > hours:
-        return False
     hours_need = sum(ceil(p/speed) for p in peaches)
     return hours_need < hours
 
 def min_hours_eat_all(peaches, hours):
-    
+    if len(peaches) > hours:
+        return 0
     left, right = 1, max(peaches)
     mid = (left + right) // 2
     while left < right:
