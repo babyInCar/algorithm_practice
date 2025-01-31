@@ -54,5 +54,6 @@ class Solution:
                 move_nums += 1
         return total
 
+
 s = Solution()
 print(s.LBS())
