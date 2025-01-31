@@ -11,6 +11,7 @@ class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
+        
 class Solution:
 
     # 该题目想要考察的点是双指针的解法
