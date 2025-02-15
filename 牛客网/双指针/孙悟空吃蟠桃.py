@@ -43,8 +43,10 @@ def min_hours_eat_all(peaches, hours):
             left = mid + 1
     return left
 
-peaches = list(map(int, input().split(" "))
-hours = int(input())
-hours = min_hours_eat_all(peaches, hours)
-print(hours)
+
+if __name__ == '__main__':
+    peaches = list(map(int, input().split(" "))
+    hours = int(input())
+    cost = min_hours_eat_all(peaches, hours)
+    print(cost)
    
