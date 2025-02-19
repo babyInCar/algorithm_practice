@@ -51,7 +51,6 @@ def check(mid, m, n, matrix):
     dx = [0, 1, 0, -1]
     dy = [1, 0, -1, 0]
     while q:
-        print(f"===={q}")
         w, x, y = heapq.heappop(q)
         w = -w
         if vis[x][y]:
@@ -59,15 +58,18 @@ def check(mid, m, n, matrix):
         vis[x][y] = True
         for i in range(4):
             nx, ny = x + dx[i], y + dy[i]
+            # 如果没越界&且未被访问过&剩余油量可以通行
             if 0 <= nx < n and 0 <= ny < m and matrix[nx][ny] != 0 and not vis[nx][ny] and matrix[nx][ny] <= w:
                 if matrix[nx][ny] == -1:
                     nw = 100
                 else:
+                    # 剩余油量消耗掉通行当前地点
                     nw = w - matrix[nx][ny]
                 if nw > dis[nx][ny]:
                     dis[nx][ny] = nw
                     heapq.heappush(q, (-nw, nx, ny))
-
+    print(f"vis is {vis}")
+    # 看是否能到达终点
     return vis[m-1][n-1]
 
 
@@ -80,11 +82,14 @@ if __name__ == '__main__':
     ans = -1
 
     while left <= right:
+        print(f"left is {left},right is:{right}")
         mid = (left + right) // 2
         if check(mid, rows, cols, matrix):
+            # 如果能到达终点，则减少初始油量
             ans = mid
             right = mid - 1
         else:
+            # 反之， 增加初始油量
             left = mid + 1
     print(ans)
     # print(bfs(matrix, rows, cols))
