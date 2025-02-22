@@ -24,23 +24,24 @@
 
 from collections import deque
 
+
 def is_valid(state, capacity):
     left_sheep, left_wolves, right_sheep, right_wolves = state
     # 检查左右两岸羊和狼的数量是否合法
     if left_sheep < 0 or left_wolves < 0 or right_sheep < 0 or right_wolves < 0:
         return False
     # 检查左岸羊和狼的数量关系
-    if left_sheep > 0 and left_sheep < left_wolves:
+    if 0 < left_sheep < left_wolves:
         return False
     # 检查右岸羊和狼的数量关系
-    if right_sheep > 0 and right_sheep < right_wolves:
+    if 0 < right_sheep < right_wolves:
         return False
     # 检查运送的动物数量是否超过船的容量
     if left_sheep + left_wolves + right_sheep + right_wolves > 0:
         if left_sheep + left_wolves - (right_sheep + right_wolves) <= capacity:
-
             return True
     return False
+
 
 def min_crossing_times(sheep, wolves, capacity):
     # 初始状态：左岸有所有羊和狼，右岸没有羊和狼
@@ -50,7 +51,7 @@ def min_crossing_times(sheep, wolves, capacity):
     # 队列用于广度优先搜索
     queue = deque([(start_state, 0)])
     # 记录已经访问过的状态
-    visited = set([start_state])
+    visited = set(start_state)
 
     while queue:
         current_state, times = queue.popleft()
@@ -63,7 +64,7 @@ def min_crossing_times(sheep, wolves, capacity):
         # 尝试所有可能的运送组合
         for s in range(min(left_sheep + 1, capacity + 1)):
             for w in range(min(left_wolves + 1, capacity - s + 1)):
-                if s + w > 0 and s + w <= capacity:
+                if 0 < s + w <= capacity:
                     new_left_sheep = left_sheep - s
                     new_left_wolves = left_wolves - w
                     new_right_sheep = right_sheep + s
@@ -89,5 +90,4 @@ if __name__ == '__main__':
     # M, N, X = map(int, input().split())
     print("=======")
     m, n, vol = map(int, input().split(","))
-    # print("--------")
     print(min_crossing_times(m, n, vol))
