@@ -1,4 +1,6 @@
+"""
 
+"""
 
 def letterChain(index, letter_list):
 
@@ -11,7 +13,6 @@ def letterChain(index, letter_list):
         if item.startswith(start[-1]):
             final_str += item[1:]
     # for item in letter_list:
-
 
 
 if __name__ == '__main__':
