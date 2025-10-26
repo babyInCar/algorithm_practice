@@ -25,52 +25,39 @@ abc 2
 6
 说明
 可以构成：ab ac ba bc ca cb 。
+
+使用递归回溯的算法。
+确保：
+1.相邻的字符不能相同
+2.使用过的字符串不继续使用
 """
 
 
-def generate_combinations(input_str, target_length):
+def backtrack(input_str, target_length, results, current, used):
+    """使用回溯法解决当前问题"""
+    # 1.设定终止条件
+    if len(current) == target_length:
+        results.add(current)
+        return
 
-    # if target_length == len(current):
-    #     results.add(current)
-    #     return
-    #
-    # for i in range(len(input_str)):
-    #     if used[i] or (current and current[-1] == input_str[i]):
-    #         continue
-    #     used[i] = True
-    #     # 方法一、递归
-    #     generate_combinations(input_str, target_length, current + input_str[i], results, used)
-    #     used[i] = False
-    results = set()
-    n = len(input_str)
-
-    stack = [("", [False]*n, 0)]
-    while stack:
-        current,used, start = stack.pop()
-
-        if target_length == len(current):
-            results.add(current)
+    for i in range(len(input_str)):
+        if used[i] or (current and current[-1] == input_str[i]):
             continue
-        for i in range(start, n):
-            if used[i] or (i > 0 and input_str[i] == input_str[i-1] and not used[i-1]):
-                continue
+        used[i] = True
+        backtrack(input_str, target_length, results, current + input_str[i], used)
+        used[i] = False
 
-            new_used = used.copy()
-            new_used[i] = True
-            stack.append((current + input_str[i], new_used, i+1))
-    print(results)
-    return results
 
 def count_unique_combinations(input_str, target_length):
     """计算唯一的字符串"""
-    unique_combination = set()
+    if len(input_str) > 30:
+        return 0
+    unique_combinations = set()
     used = [False] * len(input_str)
-    generate_combinations(input_str, target_length, "", unique_combination, used)
-    return len(unique_combination)
+    backtrack(input_str, target_length, unique_combinations, "", used)
+    return len(unique_combinations)
 
 
 if __name__ == '__main__':
-    input_str, target_length = input().split(" ")
-    ret = generate_combinations(input_str, target_length)
-    print(len(ret))
-    # print(count_unique_combinations(input_str, int(target_length)))
+    input_str, n = input().split(" ")
+    print(count_unique_combinations(input_str, int(n)))

@@ -37,45 +37,64 @@ d
 
 输出
 worddwordda
+
+@author: gaos
+@date:   2025/10/22
+@addr: 武汉光谷书房大学园分馆
 """
-
-import sys
-
-
-# 自定义排序：长度降序，长度相同按字典序
-def cmp(s1, s2):
-    return (len(s2), s1)  # Python 默认元组排序，优先按长度降序
 
 
 def main():
-    # k, n = map(int, sys.stdin.readline().split())  # 读取 k 和 n
-    k = int(input())
+    # m, n = map(int, input())
+    index = int(input())
     n = int(input())
-    words = [sys.stdin.readline().strip() for _ in range(n)]  # 读取 n 个单词
+    words = [input().strip() for _ in range(n)]
 
-    current = words[k]  # 取 k 位置的单词作为起点
-    ans = [[] for _ in range(26)]  # 创建 26 个列表存储单词
+    ans = [[] for _ in range(26)]
 
     for i in range(n):
-        if i != k:
-            ans[ord(words[i][0]) - ord('a')].append(words[i])
+        if i != index:
+            ans[ord(words[i][0])-ord('a')].append(words[i])
 
-    # 对每个桶排序
     for i in range(26):
-        ans[i].sort(key=lambda x: (-len(x), x))  # 长度降序，字典序升序
-    print(ans)
+        ans[i].sort(key=lambda x: (-len(x), x))
 
+    current = words[index]
     res = current
     while current:
-        pos = ord(current[-1]) - ord('a')  # 取最后一个字符确定下一个单词
+        pos = ord(current[-1]) - ord('a')
         if not ans[pos]:
             break
-        current = ans[pos].pop(0)  # 取第一个单词
+        current = ans[pos].pop(0)
         res += current
 
     print(res)
 
+    # index = int(input())
+    # n = int(input())
+    # words = [input().strip() for _ in range(n)]
+    #
+    # ans = [[] for _ in range(26)]
+    #
+    # for i in range(n):
+    #     if i != index:
+    #         ans[ord(words[i][0]) - ord('a')].append(words[i])
+    #
+    # for i in range(26):
+    #     ans[i].sort(key=lambda x: (-len(x), x))
+    #
+    # # print(ans)
+    #
+    # current = words[index]
+    # res = current
+    # while current:
+    #     pos = ord(current[-1]) - ord('a')
+    #     if len(ans[pos]) == 0:
+    #         break
+    #     current = ans[pos].pop(0)   # 这里的0很重要
+    #     res += current
+    # print(res)
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()
-

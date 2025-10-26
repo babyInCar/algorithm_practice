@@ -40,3 +40,72 @@ N 代表最后被启动的发动机个数
 时刻2启动（0,4）（其中0被1,7关联启动，4被3,5关联启动）；
 至此所有发动机都被启动，最后被启动的有2个，分别是0和4。
 """
+
+import sys
+from collections import deque
+
+
+def get_neighbors(x, N):
+    """获取环形数组中节点 x 的邻居"""
+    if x == 0:
+        return [N - 1, 1]
+    elif x == N - 1:
+        return [N - 2, 0]
+    return [x - 1, x + 1]
+
+
+def main():
+    N, E = map(int, sys.stdin.readline().split())
+    # 哈希表，用于存储每个启动时刻启动的发动机列表
+    table = {}
+    min_key = float('inf')
+    # 遍历每条启动信息
+    for _ in range(E):
+        T, P = map(int, sys.stdin.readline().split())
+        if T not in table:
+            table[T] = []
+        # 将发动机编号添加到相应的启动时刻中
+        table[T].append(P)
+        min_key = min(min_key, T)
+
+    queue = deque()
+    # 用于标记发动机是否已经启动
+    check_list = [False] * N
+    # 已经启动的数量
+    total = 0
+    cur_time = min_key
+    last_started = []
+
+    # BFS
+    while total < N:
+        # 如果当前时刻有发动机要启动
+        if cur_time in table:
+            for x in table[cur_time]:
+                if not check_list[x]:
+                    check_list[x] = True
+                    queue.append(x)
+
+        q_size = len(queue)
+        total += q_size
+        # 全部启动完毕
+        if total == N:
+            last_started.extend(queue)
+            break
+        # 关联启动当前启动的发动机周边的发动机
+        for _ in range(q_size):
+            x = queue.popleft()
+            for nx in get_neighbors(x, N):
+                if not check_list[nx]:
+                    check_list[nx] = True
+                    queue.append(nx)
+        # 时间增加
+        cur_time += 1
+
+    last_started.sort()
+    print(len(last_started))
+    print(" ".join(map(str, last_started)))
+
+
+if __name__ == "__main__":
+    main()
+
