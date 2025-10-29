@@ -40,9 +40,9 @@ def main():
         return
 
     left = find_left_small(heights)
-    print(f"left is {left}")
+    # print(f"left is {left}")
     right = find_right_smaller(heights)
-    print(f"right is {right}")
+    # print(f"right is {right}")
 
     res = float("inf")
     for j in range(n):
